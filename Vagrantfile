@@ -57,25 +57,26 @@ Vagrant.configure("2") do |config|
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
   # end
+  node.config.vm.box = "ubuntu/xenial64"
   (1..2).each do |i|
-      config.vm.define "node-#{i}" do node
-          config.vm.hostname = "vagrant-jboss-fuse-#{i}"
-          config.vm.box = "ubuntu/xenial64"
-          config.vm.provider :virtualbox do |vb, override|
+      config.vm.define "node-#{i}" do |node|
+          node.config.vm.hostname = "vagrant-jboss-fuse-#{i}"
+
+          node.config.vm.provider :virtualbox do |vb, override|
               vb.gui = true
               vb.customize ["modifyvm", :id, "--memory", "10000"]
               vb.customize ["modifyvm", :id, "--cpus", "8"]
               vb.customize ["modifyvm", :id, "--vram", "40"]
               override.vm.network :private_network, ip: "33.33.33.6#{i}"
           end
-          config.vm.provision "shell", inline: <<-SHELL
+          node.config.vm.provision "shell", inline: <<-SHELL
                               apt-get update
                               apt-get upgrade -y
                               apt-get dist-upgrade -y
                               SHELL
-          config.vm.provision "shell", :path => "install-java-and-git.sh"
-          config.vm.provision "file", source: "jboss-fuse-full-6.2.1.redhat-185.zip", destination: "jboss-fuse-full-6.2.1.redhat-185.zip"
-          config.vm.provision "shell", :path => "install.sh"
+          node.config.vm.provision "shell", :path => "install-java-and-git.sh"
+          node.config.vm.provision "file", source: "jboss-fuse-full-6.2.1.redhat-185.zip", destination: "jboss-fuse-full-6.2.1.redhat-185.zip"
+          node.config.vm.provision "shell", :path => "install.sh"
       end
   end
 
