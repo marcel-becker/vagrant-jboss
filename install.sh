@@ -18,14 +18,22 @@ set -e
 #
 # Lets switch to the /opt/jboss dir
 #
+sudo rm -Rf /opt/jboss
 mkdir -p /opt/jboss
-
-mv jboss-fuse-full-6.2.1.redhat-185.zip /opt/jboss
 
 cd /opt/jboss
 
-# Download and extract the distro
-#curl -O ${FUSE_DISTRO_URL}
+if [ -f /vagrant/jboss-fuse-full-6.2.1.redhat-185.zip ];  then
+    cp /vagrant/jboss-fuse-full-6.2.1.redhat-185.zip /opt/jboss
+else
+    # Download and extract the distro
+    # curl -O http://origin-repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/jboss-fuse-full/6.2.1.redhat-185/jboss-fuse-full-6.2.1.redhat-185.zip
+    cd /vagrant
+    curl -O ${FUSE_DISTRO_URL}
+    cp /vagrant/jboss-fuse-full-6.2.1.redhat-185.zip /opt/jboss
+    cd /opt/jboss
+fi
+
 
 jar -xvf ${FUSE_ARTIFACT_ID}-${FUSE_VERSION}.zip
 rm ${FUSE_ARTIFACT_ID}-${FUSE_VERSION}.zip
@@ -87,7 +95,7 @@ echo '' >> jboss-fuse/etc/users.properties
 
 # rm /opt/jboss/install.sh
 
-cp activemq.xml /opt/jboss/jboss-fuse/etc/
+#cp activemq.xml /opt/jboss/jboss-fuse/etc/
 
 # lets default to the jboss-fuse dir so folks can more easily navigate to around the server install
 
