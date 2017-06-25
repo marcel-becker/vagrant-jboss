@@ -36,6 +36,9 @@ fi
 
 
 jar -xvf ${FUSE_ARTIFACT_ID}-${FUSE_VERSION}.zip
+
+echo "Script executed from: ${PWD}"
+
 rm ${FUSE_ARTIFACT_ID}-${FUSE_VERSION}.zip
 mv jboss-fuse-${FUSE_VERSION} jboss-fuse
 chmod a+x jboss-fuse/bin/*

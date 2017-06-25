@@ -1,4 +1,11 @@
 #!/bin/bash
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get update
+apt-get upgrade -y
+apt-get dist-upgrade -y
+
+
 # Fuse environment setup
 sudo apt-get purge openjdk*
 sudo apt-get update
