@@ -15,10 +15,11 @@ FUSE_DISTRO_URL=http://origin-repository.jboss.org/nexus/content/groups/ea/org/j
 # Lets fail fast if any command in this script does succeed.
 set -e
 
+
 #
 # Lets switch to the /opt/jboss dir
 #
-sudo rm -Rf /opt/jboss
+sudo rm -rf /opt/jboss
 mkdir -p /opt/jboss
 
 cd /opt/jboss
