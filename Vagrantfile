@@ -89,13 +89,18 @@ Vagrant.configure("2") do |config|
             #                   apt-get dist-upgrade -y
             #                   SHELL
             node.vm.provision "shell", :path => "install-java-and-git.sh"
+
+            # install jboss fuse and copy the correct config files.
             node.vm.provision "shell", :path => "install.sh"
             node.vm.provision "shell", inline: "cp /vagrant/activemq-#{i}.xml /opt/jboss/jboss-fuse/etc/activemq.xml"
             node.vm.provision "shell", inline: "cp /vagrant/users.properties /opt/jboss/jboss-fuse/etc/"
+            # Start jboss fuse.
             node.vm.provision :shell, path: "start-fuse.sh", run: 'always'
 
+            # install apache AMQ
             node.vm.provision "shell", :path => "install-apache-amq.sh"
             node.vm.provision "shell", inline: "cp /vagrant/activemq-apache-#{i}.xml /opt/amq/amq/conf/activemq.xml"
+            # Start Apache AMQ
             # node.vm.provision :shell, inline: "/opt/amq/amq/bin/activemq console", run: 'always'
 
         end
