@@ -16,6 +16,7 @@ FUSE_DISTRO_URL=http://origin-repository.jboss.org/nexus/content/groups/ea/org/j
 set -e
 
 
+if [ ! -d /opt/jboss/jboss-fuse ]; then
 #
 # Lets switch to the /opt/jboss dir
 #
@@ -104,3 +105,5 @@ echo '' >> jboss-fuse/etc/users.properties
 # lets default to the jboss-fuse dir so folks can more easily navigate to around the server install
 
 echo "run using  /opt/jboss/jboss-fuse/bin/fuse server"
+
+fi

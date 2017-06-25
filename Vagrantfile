@@ -60,7 +60,11 @@ Vagrant.configure("2") do |config|
     #config.vm.box = "ubuntu/xenial64"
     (1..4).each do |i|
         config.vm.define "node-#{i}" do |node|
-            node.vm.hostname = "vagrant-jboss-fuse-#{i}"
+            if i == 4
+                node.vm.hostname = "vagrant-jboss-fuse-#{i+10}"
+            else
+                node.vm.hostname = "vagrant-jboss-fuse-#{i}"
+            end
             node.vm.box = "bento/ubuntu-16.04"
             # node.vm.network "public_network"
             #node.vm.network :private_network, ip: "192.168.2#{i}.10", virtualbox__intnet: true
@@ -71,8 +75,13 @@ Vagrant.configure("2") do |config|
                 vb.customize ["modifyvm", :id, "--memory", "10000"]
                 vb.customize ["modifyvm", :id, "--cpus", "2"]
                 vb.customize ["modifyvm", :id, "--vram", "40"]
-                override.vm.network :private_network, ip: "192.168.20.#{i+10}"
-                #override.vm.network "public_network", ip: "192.168.2#{i}.10", use_dhcp_assigned_default_route: true
+                if i == 4
+                    override.vm.network :private_network, ip: "10.22.54.17"
+                else
+                    override.vm.network :private_network, ip: "10.22.54.#{i+6}"
+                end
+                #override.vm.network :private_network, ip: "192.168.20.#{i+10}"
+                ##override.vm.network "public_network", ip: "192.168.2#{i}.10", use_dhcp_assigned_default_route: true
             end
             # node.vm.provision "shell", inline: <<-SHELL
             #                   apt-get update
@@ -80,14 +89,14 @@ Vagrant.configure("2") do |config|
             #                   apt-get dist-upgrade -y
             #                   SHELL
             node.vm.provision "shell", :path => "install-java-and-git.sh"
-            #node.vm.provision "shell", :path => "install.sh"
-            #node.vm.provision "shell", inline: "cp /vagrant/activemq-#{i}.xml /opt/jboss/jboss-fuse/etc/activemq.xml"
-            #node.vm.provision "shell", inline: "cp /vagrant/users.properties /opt/jboss/jboss-fuse/etc/"
-            #node.vm.provision :shell, path: "start-fuse.sh", run: 'always'
+            node.vm.provision "shell", :path => "install.sh"
+            node.vm.provision "shell", inline: "cp /vagrant/activemq-#{i}.xml /opt/jboss/jboss-fuse/etc/activemq.xml"
+            node.vm.provision "shell", inline: "cp /vagrant/users.properties /opt/jboss/jboss-fuse/etc/"
+            node.vm.provision :shell, path: "start-fuse.sh", run: 'always'
 
             node.vm.provision "shell", :path => "install-apache-amq.sh"
             node.vm.provision "shell", inline: "cp /vagrant/activemq-apache-#{i}.xml /opt/amq/amq/conf/activemq.xml"
-            node.vm.provision :shell, inline: "/opt/amq/amq/bin/activemq console", run: 'always'
+            # node.vm.provision :shell, inline: "/opt/amq/amq/bin/activemq console", run: 'always'
 
         end
     end

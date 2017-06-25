@@ -96,7 +96,7 @@ permissions and limitations under the License.
         <!-- Link to Broker A -->
         <networkConnector
             name="linkToBrokerA"
-            uri="static:(tcp://192.168.20.11:61616)"
+            uri="static:(tcp://10.22.54.7:61616)"
             networkTTL="3"
             dynamicOnly="false"
             conduitSubscriptions="true"
@@ -121,7 +121,7 @@ permissions and limitations under the License.
         <!-- Link to Broker B -->
         <networkConnector
             name="linkToBrokerB"
-            uri="static:(tcp://192.168.20.12:61616)"
+            uri="static:(tcp://10.22.54.8:61616)"
             networkTTL="3"
             dynamicOnly="false"
             conduitSubscriptions="true"
@@ -145,7 +145,7 @@ permissions and limitations under the License.
         <!-- Link to Broker C -->
         <networkConnector
             name="linkToBrokerC"
-            uri="static:(tcp://192.168.20.13:61616)"
+            uri="static:(tcp://10.22.54.9:61616)"
             networkTTL="3"
             dynamicOnly="false"
             conduitSubscriptions="true"
