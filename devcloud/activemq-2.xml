@@ -101,10 +101,10 @@ permissions and limitations under the License.
                           uri="static:(tcp://192.168.20.11:61616,tcp://192.168.20.13:61616,tcp://192.168.20.14:61616)"
                           networkTTL="4"
                           duplex="true">
-          <dynamicallyIncludedDestinations>
+          <staticallyIncludedDestinations>
             <topic physicalName=">"/>
             <queue physicalName=">"/>
-          </dynamicallyIncludedDestinations>
+          </staticallyIncludedDestinations>
         </networkConnector>
       </networkConnectors>
 

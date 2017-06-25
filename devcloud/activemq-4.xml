@@ -102,10 +102,10 @@ permissions and limitations under the License.
                           networkTTL="4"
                           duplex="true"
                           >
-          <dynamicallyIncludedDestinations>
+          <staticallyIncludedDestinations>
             <topic physicalName=">"/>
             <queue physicalName=">"/>
-          </dynamicallyIncludedDestinations>
+          </staticallyIncludedDestinations>
         </networkConnector>
       </networkConnectors>
 
