@@ -92,10 +92,20 @@ Vagrant.configure("2") do |config|
 
             # install jboss fuse and copy the correct config files.
             node.vm.provision "shell", :path => "install.sh"
-            node.vm.provision "shell", inline: "cp /vagrant/activemq-#{i}.xml /opt/jboss/jboss-fuse/etc/activemq.xml"
+
+            # Use the Mitre config files
+            # node.vm.provision "shell", inline: "cp /vagrant/activemq-#{i}.xml /opt/jboss/jboss-fuse/etc/activemq.xml"
+
+            # use the slightly modified original NG Dev Cloud config files
+            #node.vm.provision "shell", inline: "cp /vagrant/devcloud/activemq-#{i}.xml /opt/jboss/jboss-fuse/etc/activemq.xml"
+
+            # Use the original ng devcloud
+            node.vm.provision "shell", inline: "cp /vagrant/ng-original/activemq-ng-#{i}.xml /opt/jboss/jboss-fuse/etc/activemq.xml"
+
             node.vm.provision "shell", inline: "cp /vagrant/users.properties /opt/jboss/jboss-fuse/etc/"
             # Start jboss fuse.
             node.vm.provision :shell, path: "start-fuse.sh", run: 'always'
+
 
             # install apache AMQ
             node.vm.provision "shell", :path => "install-apache-amq.sh"
