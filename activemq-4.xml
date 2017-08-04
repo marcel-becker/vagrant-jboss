@@ -40,7 +40,7 @@ permissions and limitations under the License.
                 <constantPendingMessageLimitStrategy limit="1000"/>
               </pendingMessageLimitStrategy>
               <subscriptionRecoveryPolicy>
-                //<timedSubscriptionRecoveryPolicy recoverDuration="10800000" />
+                <!-- <timedSubscriptionRecoveryPolicy recoverDuration="10800000" /> -->
                 <timedSubscriptionRecoveryPolicy recoverDuration="0" />
               </subscriptionRecoveryPolicy>
             </policyEntry>
