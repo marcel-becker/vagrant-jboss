@@ -7,7 +7,7 @@
 set -x
 
 # Adjust the following env vars if needed.
-FUSE_VERSION=6.2.1.redhat-185
+FUSE_VERSION=6.2.1.redhat-211
 FUSE_ARTIFACT_ID=jboss-fuse-full
 #FUSE_DISTRO_URL=https://repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${FUSE_VERSION}/${FUSE_ARTIFACT_ID}-${FUSE_VERSION}.zip
 FUSE_DISTRO_URL=http://origin-repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${FUSE_VERSION}/${FUSE_ARTIFACT_ID}-${FUSE_VERSION}.zip
